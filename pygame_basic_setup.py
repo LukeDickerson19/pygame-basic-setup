@@ -49,10 +49,22 @@ class PyGameView(object):
         # update display
         pygame.display.update()
 
-    def draw_text(self, text, x, y, size, color = (100, 100, 100)):
+        
+    def draw_text(self, text, x, y, size, \
+        text_color = (100, 100, 100), \
+        background_color = (0, 0, 0)):
+
+        # make text
         basicfont = pygame.font.SysFont(None, size)
-        text_render = basicfont.render(
-            text, True, color)
+        text_render = basicfont.render(text, True, text_color)
+        text_width = text_render.get_width()
+        text_height = text_render.get_height()
+
+        # draw background
+        pygame.draw.rect(self.surface, background_color, \
+            [x, y, text_width+50, text_height])
+
+        # draw text
         self.surface.blit(text_render, (x, y))
 
 class Model(object):
